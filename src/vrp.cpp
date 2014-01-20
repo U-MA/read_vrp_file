@@ -31,6 +31,9 @@ Vrp::Vrp(const char *filepath)
 
     std::getline(ifs, str); // display_data_type
     display_data_type_ = str.substr(19);
+
+    std::getline(ifs, str); // capacity
+    std::sscanf(str.data()+11, "%d", &capacity_);
 }
 
 std::string Vrp::name(void) const
@@ -56,4 +59,9 @@ std::string Vrp::edge_weight_format(void) const
 std::string Vrp::display_data_type(void) const
 {
     return display_data_type_;
+}
+
+int Vrp::capacity(void) const
+{
+    return capacity_;
 }

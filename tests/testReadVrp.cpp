@@ -43,3 +43,8 @@ TEST(ReadVrpFile, display_data_type)
 {
     CHECK_EQUAL("NO_DISPLAY", vrp->display_data_type());
 }
+
+TEST(ReadVrpFile, capacity)
+{
+    LONGS_EQUAL(6000, vrp->capacity());
+}
