@@ -15,10 +15,11 @@ TEST(ReadVrpFile, name)
     std::string name = vrp.name();
 
     CHECK_EQUAL("E-n13-k4", name);
+}
 
-    Vrp vrp2("Vrp-All/E/E-n101-k14.vrp");
+TEST(ReadVrpFile, demension)
+{
+    Vrp vrp("Vrp-All/E/E-n13-k4.vrp");
 
-    name = vrp2.name();
-
-    CHECK_EQUAL("E-n101-k14", name);
+    LONGS_EQUAL(13, vrp.demension());
 }
