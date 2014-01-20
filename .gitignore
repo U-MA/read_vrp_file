@@ -12,8 +12,7 @@
 *.la
 *.a
 
-cpputest-3.5/
 lib/
 objs/
 
-readVrpFile_test
+readVrpFile_tests
