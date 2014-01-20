@@ -33,3 +33,8 @@ TEST(ReadVrpFile, edge_weight_type)
 {
     CHECK_EQUAL("EXPLICIT", vrp->edge_weight_type());
 }
+
+TEST(ReadVrpFile, edge_weight_format)
+{
+    CHECK_EQUAL("LOWER_ROW", vrp->edge_weight_format());
+}

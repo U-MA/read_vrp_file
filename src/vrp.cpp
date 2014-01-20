@@ -26,6 +26,9 @@ Vrp::Vrp(const char *filepath)
 
     std::getline(ifs, str); // edge_weight_type
     edge_weight_type_ = str.substr(19);
+
+    std::getline(ifs, str); // edge_weight_format
+    edge_weight_format_ = str.substr(20);
 }
 
 std::string Vrp::name(void) const
@@ -41,4 +44,9 @@ int Vrp::demension(void) const
 std::string Vrp::edge_weight_type(void) const
 {
     return edge_weight_type_;
+}
+
+std::string Vrp::edge_weight_format(void) const
+{
+    return edge_weight_format_;
 }
