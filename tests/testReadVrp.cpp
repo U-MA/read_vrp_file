@@ -23,3 +23,9 @@ TEST(ReadVrpFile, demension)
 
     LONGS_EQUAL(13, vrp.demension());
 }
+
+TEST(ReadVrpFile, edge_weight_type)
+{
+    Vrp vrp("Vrp-All/E/E-n13-k4.vrp");
+    CHECK_EQUAL("EXPLICIT", vrp.edge_weight_type());
+}

@@ -20,9 +20,12 @@ Vrp::Vrp(const char *filepath)
 
     std::getline(ifs, str); // comment
     std::getline(ifs, str); // type
-    std::getline(ifs, str); // demension
 
+    std::getline(ifs, str); // demension
     std::sscanf(str.data()+12, "%d", &demension_);
+
+    std::getline(ifs, str); // edge_weight_type
+    edge_weight_type_ = str.substr(19);
 }
 
 std::string Vrp::name(void) const
@@ -33,4 +36,9 @@ std::string Vrp::name(void) const
 int Vrp::demension(void) const
 {
     return demension_;
+}
+
+std::string Vrp::edge_weight_type(void) const
+{
+    return edge_weight_type_;
 }
