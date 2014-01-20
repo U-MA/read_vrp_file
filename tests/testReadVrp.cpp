@@ -38,3 +38,8 @@ TEST(ReadVrpFile, edge_weight_format)
 {
     CHECK_EQUAL("LOWER_ROW", vrp->edge_weight_format());
 }
+
+TEST(ReadVrpFile, display_data_type)
+{
+    CHECK_EQUAL("NO_DISPLAY", vrp->display_data_type());
+}

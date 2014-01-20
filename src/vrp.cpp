@@ -4,7 +4,6 @@
 
 #include "vrp.h"
 
-
 Vrp::Vrp(const char *filepath)
 {
     std::ifstream ifs(filepath);
@@ -29,6 +28,9 @@ Vrp::Vrp(const char *filepath)
 
     std::getline(ifs, str); // edge_weight_format
     edge_weight_format_ = str.substr(20);
+
+    std::getline(ifs, str); // display_data_type
+    display_data_type_ = str.substr(19);
 }
 
 std::string Vrp::name(void) const
@@ -49,4 +51,9 @@ std::string Vrp::edge_weight_type(void) const
 std::string Vrp::edge_weight_format(void) const
 {
     return edge_weight_format_;
+}
+
+std::string Vrp::display_data_type(void) const
+{
+    return display_data_type_;
 }
