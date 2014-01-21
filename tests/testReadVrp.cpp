@@ -1,6 +1,7 @@
 #include "CppUTest/TestHarness.h"
 
 #include <string>
+#include <sstream>
 
 #include "vrp.h"
 
@@ -47,4 +48,26 @@ TEST(ReadVrpFile, display_data_type)
 TEST(ReadVrpFile, capacity)
 {
     LONGS_EQUAL(6000, vrp->capacity());
+}
+
+TEST(ReadVrpFile, cost)
+{
+    LONGS_EQUAL(9 , vrp->cost(1, 0));
+    LONGS_EQUAL(14, vrp->cost(2, 0));
+    LONGS_EQUAL(42, vrp->cost(4, 3));
+}
+
+TEST(ReadVrpFile, experiment)
+{
+    std::string str("    12    23    34");
+    int expect[3] = { 12, 23, 34 };
+
+    std::istringstream iss(str);
+    int num;
+    iss >> num;
+    LONGS_EQUAL(expect[0], num);
+    iss >> num;
+    LONGS_EQUAL(expect[1], num);
+    iss >> num;
+    LONGS_EQUAL(expect[2], num);
 }

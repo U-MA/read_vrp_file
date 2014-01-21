@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
 
 #include "vrp.h"
@@ -34,6 +35,25 @@ Vrp::Vrp(const char *filepath)
 
     std::getline(ifs, str); // capacity
     std::sscanf(str.data()+11, "%d", &capacity_);
+
+    size_t edge_size = demension_ * (demension_-1) / 2;
+    cost_ = new int[edge_size];
+
+    std::getline(ifs, str); // edge_weight_section
+    std::getline(ifs, str); // cost start
+    std::istringstream iss(str);
+    int cost_size = 0;
+    for (int i=0; i < 10; i++)
+    {
+        int num;
+        iss >> num;
+        cost_[cost_size++] = num;
+    }
+}
+
+Vrp::~Vrp(void)
+{
+    delete[] cost_;
 }
 
 std::string Vrp::name(void) const
@@ -64,4 +84,11 @@ std::string Vrp::display_data_type(void) const
 int Vrp::capacity(void) const
 {
     return capacity_;
+}
+
+int Vrp::cost(int v0, int v1) const
+{
+    const int cost_index = (v1 > v0) ? v1*(v1-1)/2+v0 :
+                                       v0*(v0-1)/2+v1;
+    return cost_[cost_index];
 }

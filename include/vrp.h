@@ -7,6 +7,7 @@ class Vrp
 {
 public:
     Vrp(const char *filepath);
+    ~Vrp(void);
 
     std::string name(void) const;
     int         demension() const;
@@ -14,6 +15,7 @@ public:
     std::string edge_weight_format(void) const;
     std::string display_data_type(void) const;
     int         capacity(void) const;
+    int         cost(int v0, int v1) const;
 
 private:
     std::string name_;
@@ -22,6 +24,7 @@ private:
     std::string edge_weight_format_;
     std::string display_data_type_;
     int         capacity_;
+    int         *cost_;
 };
 
 #endif /* VRP_H */
