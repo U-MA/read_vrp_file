@@ -15,39 +15,33 @@ Vrp::Vrp(const char *filepath)
     }
 
     std::string str;
-    std::getline(ifs, str);
-    name_ = str.substr(7);
-
-    std::getline(ifs, str); // comment
-    std::getline(ifs, str); // type
-
-    std::getline(ifs, str); // demension
-    std::sscanf(str.data()+12, "%d", &demension_);
-
-    std::getline(ifs, str); // edge_weight_type
-    edge_weight_type_ = str.substr(19);
-
-    std::getline(ifs, str); // edge_weight_format
-    edge_weight_format_ = str.substr(20);
-
-    std::getline(ifs, str); // display_data_type
-    display_data_type_ = str.substr(19);
-
-    std::getline(ifs, str); // capacity
-    std::sscanf(str.data()+11, "%d", &capacity_);
-
-    size_t edge_size = demension_ * (demension_-1) / 2;
-    cost_ = new int[edge_size];
-
-    std::getline(ifs, str); // edge_weight_section
-    size_t i=0;
-    while (i < edge_size)
+    while (std::getline(ifs, str))
     {
-        std::getline(ifs, str);
-        std::istringstream iss(str);
-        while (iss.tellg() != (int)str.length())
+        if (str.find("NAME", 0) != std::string::npos)
+            name_ = str.substr(7);
+        else if (str.find("DIMENSION", 0) != std::string::npos)
+            std::sscanf(str.data()+12, "%d", &demension_);
+        else if (str.find("EDGE_WEIGHT_TYPE", 0) != std::string::npos)
+            edge_weight_type_ = str.substr(19);
+        else if (str.find("EDGE_WEIGHT_FORMAT", 0) != std::string::npos)
+            edge_weight_format_ = str.substr(20);
+        else if (str.find("DISPLAY_DATA_TYPE", 0) != std::string::npos)
+            display_data_type_ = str.substr(19);
+        else if (str.find("CAPACITY", 0) != std::string::npos)
+            std::sscanf(str.data()+11, "%d", &capacity_);
+        else if (str.find("EDGE_WEIGHT_SECTION", 0) != std::string::npos)
         {
-            iss >> cost_[i++];
+            size_t edge_size = demension_ * (demension_-1) / 2;
+            cost_ = new int[edge_size];
+
+            size_t i=0;
+            while (i < edge_size)
+            {
+                std::getline(ifs, str);
+                std::istringstream iss(str);
+                while (iss.tellg() != (int)str.length())
+                    iss >> cost_[i++];
+            }
         }
     }
 }
