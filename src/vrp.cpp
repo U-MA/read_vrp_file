@@ -5,6 +5,11 @@
 
 #include "vrp.h"
 
+static bool findKeyword(const std::string &str, const char *keyword)
+{
+    return (str.find(keyword, 0) != std::string::npos);
+}
+
 Vrp::Vrp(const char *filepath)
 {
     std::ifstream ifs(filepath);
@@ -17,19 +22,19 @@ Vrp::Vrp(const char *filepath)
     std::string str;
     while (std::getline(ifs, str))
     {
-        if (str.find("NAME", 0) != std::string::npos)
+        if (findKeyword(str, "NAME"))
             name_ = str.substr(7);
-        else if (str.find("DIMENSION", 0) != std::string::npos)
+        else if (findKeyword(str, "DIMENSION"))
             std::sscanf(str.data()+12, "%d", &demension_);
-        else if (str.find("EDGE_WEIGHT_TYPE", 0) != std::string::npos)
+        else if (findKeyword(str, "EDGE_WEIGHT_TYPE"))
             edge_weight_type_ = str.substr(19);
-        else if (str.find("EDGE_WEIGHT_FORMAT", 0) != std::string::npos)
+        else if (findKeyword(str, "EDGE_WEIGHT_FORMAT"))
             edge_weight_format_ = str.substr(20);
-        else if (str.find("DISPLAY_DATA_TYPE", 0) != std::string::npos)
+        else if (findKeyword(str, "DISPLAY_DATA_TYPE"))
             display_data_type_ = str.substr(19);
-        else if (str.find("CAPACITY", 0) != std::string::npos)
+        else if (findKeyword(str, "CAPACITY"))
             std::sscanf(str.data()+11, "%d", &capacity_);
-        else if (str.find("EDGE_WEIGHT_SECTION", 0) != std::string::npos)
+        else if (findKeyword(str, "EDGE_WEIGHT_SECTION"))
         {
             size_t edge_size = demension_ * (demension_-1) / 2;
             cost_ = new int[edge_size];
