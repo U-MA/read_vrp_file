@@ -40,14 +40,15 @@ Vrp::Vrp(const char *filepath)
     cost_ = new int[edge_size];
 
     std::getline(ifs, str); // edge_weight_section
-    std::getline(ifs, str); // cost start
-    std::istringstream iss(str);
-    int cost_size = 0;
-    for (int i=0; i < 10; i++)
+    size_t i=0;
+    while (i < edge_size)
     {
-        int num;
-        iss >> num;
-        cost_[cost_size++] = num;
+        std::getline(ifs, str);
+        std::istringstream iss(str);
+        while (iss.tellg() != (int)str.length())
+        {
+            iss >> cost_[i++];
+        }
     }
 }
 

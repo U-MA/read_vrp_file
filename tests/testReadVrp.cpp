@@ -1,5 +1,6 @@
 #include "CppUTest/TestHarness.h"
 
+#include <iostream>
 #include <string>
 #include <sstream>
 
@@ -55,9 +56,10 @@ TEST(ReadVrpFile, cost)
     LONGS_EQUAL(9 , vrp->cost(1, 0));
     LONGS_EQUAL(14, vrp->cost(2, 0));
     LONGS_EQUAL(42, vrp->cost(4, 3));
+    LONGS_EQUAL(10, vrp->cost(12, 11));
 }
 
-TEST(ReadVrpFile, experiment)
+TEST(ReadVrpFile, experiment1)
 {
     std::string str("    12    23    34");
     int expect[3] = { 12, 23, 34 };
